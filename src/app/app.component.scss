@@ -1,0 +1,113 @@
+/* Styles go here */
+
+body {
+  background: #b5afa7;
+
+  font-family: sans-serif;
+}
+
+table {
+  width: 100%;
+}
+
+.content table {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#main {
+  margin: 0 auto 0;
+  width: 800px;
+}
+
+.time {
+  background: #736d65;
+  display: inline-block;
+  padding: 6px 10px;
+}
+
+.board {
+  border: 10px solid #a49e96;
+  border-radius: 10px;
+  margin: 20px;
+  background: black;
+  display: inline-block;
+  width: 260px;
+}
+
+.tileBoard {
+  border: 10px solid #a49e96;
+  border-radius: 10px;
+  margin: 20px;
+  background: black;
+  display: inline-block;
+  width: 800px;
+  height: 800px;
+}
+
+.halfBoard {
+  border: 1px solid whitesmoke;
+  border-radius: 0px;
+  margin: -2px;
+  background: black;
+  display: inline-block;
+  width: 128px;
+  height: 256px;
+}
+
+.singleTile {
+  border: 1px solid whitesmoke;
+  border-radius: 0px;
+  margin: -2px;
+  background: black;
+  display: inline-block;
+  width: 256px;
+  height: 256px;
+}
+
+.tile {
+  width: 30px;
+  height: 30px;
+}
+
+
+
+.tilePatternBlack {
+  position: relative;
+  border: 1px solid #504d49;
+  float: left;
+  color: black;
+  background: black;
+  font-weight: bold;
+  line-height: 20px;
+  font-size: 20px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.tilePatternWhite {
+  position: relative;
+  border: 1px solid #504d49;
+  float: left;
+  color: lightgrey;
+  background: lightgrey;
+  font-weight: bold;
+  line-height: 20px;
+  font-size: 20px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+// .tile {
+//   position: relative;
+//   border: 1px solid #504d49;
+//   width: 60px;
+//   height: 60px;
+//   float: left;
+//   color: #100d09;
+//   font-weight: bold;
+//   line-height: 30px;
+//   font-size: 20px;
+//   vertical-align: middle;
+//   text-align: center;
+// }
