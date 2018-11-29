@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
-import * as uuid from "uuid";
-import { Board } from "./board";
-import { Player } from "./player";
+import { Component, OnInit } from '@angular/core';
+import * as uuid from 'uuid';
+import { Board } from './board';
+import { Player } from './player';
 
 interface ITile {
   id?: any;
@@ -11,16 +11,15 @@ interface ITile {
 }
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // columns: string[] = [];
-  // rows: number[] = [];
   playerId = 1;
-
-  title = "retrogrid-dev";
+  playerName = 'Player1';
+  playerScore = 0;
+  title = 'retrogrid-dev';
   tileObject: ITile;
   tileX: any;
   tile: ITile;
@@ -32,33 +31,59 @@ export class AppComponent implements OnInit {
   fullBoard: Array<any> = [];
   public game: any;
   board: any;
+  boardPoints = 0;
 
-  log(r: any, c: any) {
-    // console.log('Row ', r, ' ', 'Column ', c);
-    this.board.tiles[r][c] = this.board.tiles[r][c] ? 0 : 1;
-    this.halfBoard[r][c] = this.halfBoard[r][c] ? 0 : 1;
-    let x = this.halfBoard[r];
-
-    let xx = x.join("");
-    let x_rev = this.reverseBinary(xx);
-    let xxx = xx + x_rev;
-
-    let z_xxx = xxx.toString().split("");
-    let res = z_xxx.map(v => parseInt(v, 10));
-    this.fullBoard[r] = res;
-
-    console.log(this.fullBoard);
+  calculateBoardPoints(board: any) {
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let result = 0;
+    board.forEach(function(element) {
+      const _result = element.reduce(reducer);
+      result = result + _result;
+    });
+    return result;
   }
 
+  toggleCell(r: any, c: any) {
+    let res = [];
+    if (c <= 3) {
+      this.board.tiles[r][c] = this.board.tiles[r][c] ? 0 : 1;
+      this.halfBoard[r][c] = this.halfBoard[r][c] ? 0 : 1;
+      const halfBoardRow = this.halfBoard[r];
+
+      const xx = halfBoardRow.join('');
+      const x_rev = this.reverseBinary(xx);
+      const xxx = xx + x_rev;
+      const z_xxx = xxx.toString().split('');
+      res = z_xxx.map(v => parseInt(v, 10));
+      this.fullBoard[r] = res;
+    }
+    this.checkIfRowMatches(res, r);
+  }
+
+  checkIfRowMatches(row: any, index: any): any {
+    console.log(row, index);
+    const tmp_GameRow = this.pattern[index].join('');
+    console.log('tmp_GameRow: ', tmp_GameRow);
+
+    const tmp_PlayerRow = row.join('');
+    console.log('tmp_PlayerRow: ', tmp_PlayerRow);
+
+    console.log(this.pattern[index]);
+    if (tmp_GameRow === tmp_PlayerRow) {
+      console.log('a match');
+    } else {
+      console.log('no match');
+    }
+  }
   reverseBinary(text: any) {
-    const lines = text.split("\n");
-    let output = "";
+    const lines = text.split('\n');
+    let output = '';
     for (let i = 0; i < lines.length; i++) {
-      let line = lines[i];
+      const line = lines[i];
       output += line
-        .split("")
+        .split('')
         .reverse()
-        .join("");
+        .join('');
     }
     return output;
   }
@@ -69,13 +94,12 @@ export class AppComponent implements OnInit {
     this.playerTile = this.createPlayerTile();
     this.halfBoard = this.createHalfBoard();
     this.fullBoard = this.createPlayerTile();
-    // console.log(this.pattern);
-    // create board
+
     this.board = new Board({
       player: new Player({ id: this.playerId++ }),
       tiles: this.playerTile
     });
-    // console.log(this.board);
+    this.boardPoints = this.calculateBoardPoints(this.pattern);
   }
 
   // createTileObject() {
@@ -98,9 +122,10 @@ export class AppComponent implements OnInit {
       let j, x, i = o.length;
       i;
       j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x
-    );
+    ) {}
     return o;
   }
+
   createPlayerTile() {
     const baseTile = [
       [0, 0, 0, 0, 0, 0, 0, 0],

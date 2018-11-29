@@ -1,17 +1,27 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <!--  <div class="singleTile">
-    <div *ngFor="let item of pattern">
-      <div *ngFor="let itemX of item">
-        <div class="tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
-         
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Player: {{playerName}}</span>
+      <span class="example-spacer"></span>
+      <span>Points for this Level: {{boardPoints}} </span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <p></p>
+
+  <div style="text-align:center">
+    <div class="singleTile">
+      <div *ngFor="let item of pattern">
+        <div *ngFor="let itemX of item">
+          <div class="tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
+
+          </div>
         </div>
       </div>
     </div>
-  </div> -->
-  <p></p>
+    <p></p>
 
-  <!-- <div class="singleTile">
+    <!-- <div class="singleTile">
     <div *ngFor="let item of playerTile; let j = index">
       <div *ngFor=" let itemX of item; let x=index" (click)="log(j,x)">
         <div class="tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
@@ -20,26 +30,28 @@
       </div>
     </div>
   </div> -->
-  <div class="singleTile">
-    <div *ngFor="let item of fullBoard; let j = index">
-      <div *ngFor=" let itemX of item; let x=index" (click)="log(j,x)">
-        <div class="tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
+    <div class="singleTile">
+      <div *ngFor="let item of fullBoard; let j = index">
+        <div *ngFor=" let itemX of item; let x=index" (click)="toggleCell(j,x)">
+          <div class=" tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
 
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <p></p>
-  <div class="halfBoard">
+
+    <p></p>
+    <!-- <div class="halfBoard">
     <div *ngFor="let item of halfBoard; let j1 = index">
-      <div *ngFor=" let itemX of item; let x1=index" (click)="log(j1,x1)">
+      <div *ngFor=" let itemX of item; let x1=index" (click)="toggleCell(j1,x1)">
         <div class="tile" [ngClass]="{'tilePatternWhite': itemX, 'tilePatternBlack': !itemX}">
 
         </div>
       </div>
     </div>
+  </div> -->
   </div>
-</div>
-<div>
-
+  <div>
+    <button mat-raised-button color="warn">Reset</button>
+  </div>
 </div>
